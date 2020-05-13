@@ -7,7 +7,8 @@ git clone git@github.com:iPlug2/iPlug2.git
 * TODO Meson build ???
   #+BEGIN_SRC sh
 meson build
-meson setup buildvs2 --backend vs
+meson build --reconfigure
+ninja -C build
   #+END_SRC
 
   and in visual studio command
@@ -20,6 +21,8 @@ meson setup buildvs2 --backend vs
   #+BEGIN_SRC sh :session *vs-cmd*
 cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 meson setup buildvs --backend vs
+meson buildvs --backend vs --reconfigure
+meson compile -C buildvs
 
 # to cleanup/regenerate
 rm -rf buildvs
@@ -100,8 +103,19 @@ executable('dep_using_exe', 'main.c',
 
    /ZI /Gm- /Od /Fd"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\vc142.pdb" /Zc:inline /fp:precise /D "APP_API" /D "__WINDOWS_DS__" /D "__WINDOWS_MM__" /D "__WINDOWS_ASIO__" /D "IPLUG_EDITOR=1" /D "IPLUG_DSP=1" /D "_DEBUG" /D "IGRAPHICS_NANOVG" /D "IGRAPHICS_GL2" /D "WIN32" /D "_CRT_SECURE_NO_DEPRECATE" /D "_CRT_NONSTDC_NO_DEPRECATE" /D "NOMINMAX" /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MTd /std:c++14 /FC /Fa"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\" /EHsc /nologo /Fo"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\" /Fp"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.pch" /diagnostics:column 
 ** Linking cmd
+   W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\win\x64\Debug
 
-   /OUT:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\AOD_IPlug01.exe" /MANIFEST /NXCOMPAT /PDB:"W:\dev\_vst\AOD_IPlug01\build-win\pdbs\AOD_IPlug01-app_x64.pdb" /DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" "csv952.lib" /IMPLIB:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.lib" /DEBUG:FASTLINK /MACHINE:X64 /PGD:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\AOD_IPlug01.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /LIBPATH:"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\win\x64\Debug" /LIBPATH:"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IPlug\AAX_SDK\Libs\Debug" /LIBPATH:"C:\Program Files\Faust\lib" /TLBID:1 
+
+   /OUT:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\AOD_IPlug01.exe" /MANIFEST /NXCOMPAT /PDB:"W:\dev\_vst\AOD_IPlug01\build-win\pdbs\AOD_IPlug01-app_x64.pdb"
+/DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" "csv952.lib" 
+
+/IMPLIB:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.lib" /DEBUG:FASTLINK /MACHINE:X64 /PGD:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\AOD_IPlug01.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO 
+
+/LIBPATH:"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\win\x64\Debug" 
+
+/LIBPATH:"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IPlug\AAX_SDK\Libs\Debug" /LIBPATH:"C:\Program Files\Faust\lib"
+
+/TLBID:1 
 * projects
   - https://github.com/linuxmint/cinnamon-desktop/blob/master/libcinnamon-desktop/meson.build#L62
     install_headers ?
@@ -110,26 +124,31 @@ executable('dep_using_exe', 'main.c',
     - dependencies: [stdatomic_dependency],
 
 * emacs snippet
-  
 #+BEGIN_SRC emacs-lisp
 (defun aod.meson/sources (ext)
   (interactive "sExtension: ")
-  
-  (with-temp-buffer
-    (dired ".")
-    (dired-unmark-all-marks)
-    (dired-mark-files-regexp ext)
-    (dired-copy-filename-as-kill)
-    (quit-window)
-    )
-  (let* ((filenames (split-string (car kill-ring)))
-	 (formatted (mapconcat (function (lambda (x) (format "'%s'\n"x)))
-			       filenames
-			       " ")))
-    (insert formatted))
-  )
+
+  (let ((marked-files nil))
+    (with-temp-buffer
+      (dired ".")
+      (dired-unmark-all-marks)
+      (setq marked-files (dired-mark-files-regexp ext))
+      (dired-copy-filename-as-kill)
+      (quit-window)
+      )
+    (if marked-files
+	(let* ((filenames (split-string (car kill-ring)))
+	       (formatted (mapconcat (function (lambda (x) (format "'%s',\n"x)))
+				     filenames
+				     " ")))
+	  (insert formatted)))))
 #+END_SRC
+
+#+RESULTS:
+: aod\.meson/sources
 
   - dired-mark-files-containing-regexp 
     cpp
   - =w= dired-copy-filename-as-killd
+* TODO CI
+  - https://circleci.com/docs/2.0/hello-world-windows/

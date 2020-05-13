@@ -1,0 +1,13 @@
+* DONE <2020-05-13 Wed> almost there but..
+  I'm stuck with this
+  #+BEGIN_VERSE
+  1>IPlug2_IPlug_APP_IPlugAPP_dialog.cpp.obj : error LNK2001: unresolved external symbol "struct HINSTANCE__ * gHINSTANCE" (?gHINSTANCE@@3PEAUHINSTANCE__@@EA)
+1>IPlug2_IPlug_APP_IPlugAPP_main.cpp.obj : error LNK2001: unresolved external symbol "struct HINSTANCE__ * gHINSTANCE" (?gHINSTANCE@@3PEAUHINSTANCE__@@EA)
+1>IPlug2_IPlug_APP_IPlugAPP_host.cpp.obj : error LNK2019: unresolved external symbol "class iplug::IPlugAPP * __cdecl iplug::MakePlug(struct iplug::InstanceInfo const &)" (?MakePlug@iplug@@YAPEAVIPlugAPP@1@AEBUInstanceInfo@1@@Z) referenced in function "public: __cdecl iplug::IPlugAPPHost::IPlugAPPHost(void)" (??0IPlugAPPHost@iplug@@QEAA@XZ)
+
+  #+END_VERSE
+
+  .. i wasn't including the source file (effect.cpp or aodplug.cpp whatever)
+
+* TODO main.rc menu window..?
+  maybe don't need this for the no gui but still.. hm..

@@ -1,19 +1,25 @@
-#define PLUG_NAME "IPlugEffect"
-#define PLUG_MFR "AcmeInc"
+#define PLUG_NAME "AOD_IPlug01"
+#define PLUG_MFR "actondev"
 #define PLUG_VERSION_HEX 0x00010000
 #define PLUG_VERSION_STR "1.0.0"
-#define PLUG_UNIQUE_ID 'Ipef'
+#define PLUG_UNIQUE_ID 'nVvn'
 #define PLUG_MFR_ID 'Acme'
 #define PLUG_URL_STR "https://iplug2.github.io"
 #define PLUG_EMAIL_STR "spam@me.com"
 #define PLUG_COPYRIGHT_STR "Copyright 2019 Acme Inc"
-#define PLUG_CLASS_NAME IPlugEffect
+#define PLUG_CLASS_NAME AOD_IPlug01
 
-#define BUNDLE_NAME "IPlugEffect"
-#define BUNDLE_MFR "AcmeInc"
+#define BUNDLE_NAME "AOD_IPlug01"
+#define BUNDLE_MFR "actondev"
 #define BUNDLE_DOMAIN "com"
 
-#define SHARED_RESOURCES_SUBPATH "IPlugEffect"
+
+//my mods
+// #define NO_IGRAPHICS 1
+#define NO_IGRAPHICS 1
+// ! my mods
+
+#define SHARED_RESOURCES_SUBPATH "AOD_IPlug01"
 
 #define PLUG_CHANNEL_IO "2-2"
 
@@ -29,16 +35,16 @@
 #define PLUG_FPS 60
 #define PLUG_SHARED_RESOURCES 0
 
-#define AUV2_ENTRY IPlugEffect_Entry
-#define AUV2_ENTRY_STR "IPlugEffect_Entry"
-#define AUV2_FACTORY IPlugEffect_Factory
-#define AUV2_VIEW_CLASS IPlugEffect_View
-#define AUV2_VIEW_CLASS_STR "IPlugEffect_View"
+#define AUV2_ENTRY AOD_IPlug01_Entry
+#define AUV2_ENTRY_STR "AOD_IPlug01_Entry"
+#define AUV2_FACTORY AOD_IPlug01_Factory
+#define AUV2_VIEW_CLASS AOD_IPlug01_View
+#define AUV2_VIEW_CLASS_STR "AOD_IPlug01_View"
 
 #define AAX_TYPE_IDS 'EFN1', 'EFN2'
 #define AAX_TYPE_IDS_AUDIOSUITE 'EFA1', 'EFA2'
 #define AAX_PLUG_MFR_STR "Acme"
-#define AAX_PLUG_NAME_STR "IPlugEffect\nIPEF"
+#define AAX_PLUG_NAME_STR "AOD_IPlug01\nIPEF"
 #define AAX_PLUG_CATEGORY_STR "Effect"
 #define AAX_DOES_AUDIOSUITE 1
 

@@ -1,10 +1,15 @@
-sources = ['IPlugEffect.cpp']
-incdirs = include_directories('.')
-# app_lib = static_library('app',
-#                         sources,
-#                         include_directories : incdirs)
+sources = files(
+  'AOD_IPlug01.cpp',
+)
+
+# can be filled by subdirs
+includes = []
+
+includes += include_directories('.')
+
+subdir('resources')
 
 app_dep = declare_dependency(
-  include_directories: incdirs,
+  include_directories: includes,
   sources: sources
   )
