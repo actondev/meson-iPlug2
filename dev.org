@@ -4,6 +4,28 @@
 git clone git@github.com:iPlug2/iPlug2.git
   #+END_SRC
 
+* Windows setup
+  Requires msys2
+
+  Installing meson & ninja
+  #+BEGIN_SRC sh
+pacman -Sy mingw64/mingw-w64-x86_64-meson mingw64/mingw-w64-x86_64-ninja
+  #+END_SRC
+
+** Windows examples
+   #+BEGIN_SRC sh :session *vs-nogui01*
+cd examples/nogui01
+ln -s ../../iPlug2 ./iPlug2
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+mklink /J iPlug2 ..\..\iPlug2
+meson setup buildvs --backend vs
+meson buildvs --backend vs --reconfigure
+meson compile -C buildvs
+
+# to cleanup/regenerate
+rm -rf buildvs
+   #+END_SRC
 * TODO Meson build ???
   #+BEGIN_SRC sh
 meson build
@@ -152,3 +174,27 @@ executable('dep_using_exe', 'main.c',
   - =w= dired-copy-filename-as-killd
 * TODO CI
   - https://circleci.com/docs/2.0/hello-world-windows/
+* Troubleshooting
+** <2020-06-03 Wed> not launching??
+   on =IPlugAPP_main.cpp=
+   - not defined =APP_ALLOW_MULTIPLE_INSTANCES=
+   - =HANDLE hMutex = OpenMutex(MUTEX_ALL_ACCESS, 0, BUNDLE_NAME); // BUNDLE_NAME used because it won't have spaces in it= returns something..
+   - so it tries to bring it to front..
+
+
+   #+BEGIN_SRC sh
+ps -W | grep -i iplug
+   #+END_SRC
+
+   #+RESULTS:
+   : 74008       0       0       8472  ?              0 20:53:46 W:\dev\_tmp\mesonIPlug\examples\nogui01\buildvs\iplug_exe.exe
+
+
+   Note: these are the collumns
+   #+BEGIN_EXAMPLE
+         PID    PPID    PGID     WINPID   TTY         UID    STIME COMMAND
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+taskkill //f //pid 8472
+   #+END_SRC
