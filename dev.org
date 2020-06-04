@@ -13,9 +13,10 @@ pacman -Sy mingw64/mingw-w64-x86_64-meson mingw64/mingw-w64-x86_64-ninja
   #+END_SRC
 
 ** Windows examples
-   #+BEGIN_SRC sh :session *vs-nogui01*
+
+*** TODO delete NoGui 01 -- iplug as subdir
+    #+BEGIN_SRC sh :session *vs-nogui01*
 cd examples/nogui01
-ln -s ../../iPlug2 ./iPlug2
 # visual studio command prompts
 cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 mklink /J iPlug2 ..\..\iPlug2
@@ -25,7 +26,38 @@ meson compile -C buildvs
 
 # to cleanup/regenerate
 rm -rf buildvs
-   #+END_SRC
+    #+END_SRC
+
+*** NoGui 02 -- iplug as subproject
+    #+BEGIN_SRC sh :session *vs-nogui02*
+cd examples/nogui02
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+mklink /J subprojects\iPlug2 ..\..\iPlug2
+meson setup buildvs --backend vs
+meson buildvs --backend vs --reconfigure
+meson compile -C buildvs
+
+# to cleanup/regenerate
+rm -rf buildvs
+    #+END_SRC
+*** IPlugControls
+    #+BEGIN_SRC sh :session *vs-iplug-controls*
+cd examples/IPlugControls
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+mklink /J subprojects\iPlug2 ..\..\iPlug2
+meson setup --backend vs buildvs
+# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
+# --reconfigure will not work
+meson buildvs --backend vs --wipe
+meson setup --reconfigure buildvs
+meson compile -C buildvs
+
+# to cleanup/regenerate
+rm -rf buildvs
+    
+    #+END_SRC
 * TODO Meson build ???
   #+BEGIN_SRC sh
 meson build

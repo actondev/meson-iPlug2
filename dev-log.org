@@ -11,3 +11,186 @@
 
 * TODO main.rc menu window..?
   maybe don't need this for the no gui but still.. hm..
+* meson articles etc
+  - https://medium.com/@germandiagogomez/getting-started-with-meson-in-c-part-2-58150354ff17
+    - https://github.com/germandiagogomez/getting-started-with-meson
+* <2020-06-04 Thu> IPlug2 as meson subproject
+** options
+   #+BEGIN_SRC meson
+option('IGRAPHICS',
+       type: 'array',
+       choices: [
+	 'NO_IGRAPHICS',
+	 # possible graphics libraries
+	 # see IGraphics.h
+	 'IGRAPHICS_AGG',
+	 'IGRAPHICS_CAIRO',
+	 'IGRAPHICS_NANOVG',
+	 'IGRAPHICS_LICE',
+	 'IGRAPHICS_CANVAS',
+	 'IGRAPHICS_SKIA',
+	 # --
+
+	 # other flags..?
+	 # see files:
+	 # IGraphics_include_in_plug_hdr.h
+	 # IGraphics_select.h
+	 # IGraphics.cpp
+	 'IGRAPHICS_GLES2',
+	 'IGRAPHICS_GLES3',
+	 'IGRAPHICS_GL2',
+	 'IGRAPHICS_GL3',
+	 
+	 'IGRAPHICS_IMGUI',
+
+	 'IGRAPHICS_DRAWFILL_DIRECT',
+	 'IGRAPHICS_CPU',
+	 'IGRAPHICS_WEB_POINTERLOCK',
+	 'IGRAPHICS_FREETYPE',
+
+	 'IGRAPHICS_METAL',
+	 'IGRAPHICS_IMGUI',
+       ],
+       value: ['NO_IGRAPHICS']
+      )
+  
+   #+END_SRC
+** conditional including IGraphics folder
+   if ='IGRAPHICS= options doesn't have the
+   =NO_IGRAPHICS=
+
+   also how to easily go through the options
+   and add the =define= statementes?
+
+   #+BEGIN_SRC meson
+add_project_arguments('-DNO_IGRAPHICS', language : 'cpp')   
+   #+END_SRC
+
+** IPlugControls meson example
+   - Cannot open include file: 'nanosvg.h':
+     adding =iplug2/Dependencies/IGraphics= dir
+   - Cannot open include file: 'IControls.h'
+     didn't have the subdirs =controls= etc..
+   - Cannot open include file: 'nanovg.h'
+     ~includes += include_directories('./NanoVG/src')~
+   - Cannot open include file: 'stb_textedit.h'
+   - igraphics..
+     #+BEGIN_VERSE
+     IGraphicsNanoVG.h(28,1): fatal error C1189: #error:  you must define either IGRAPHICS_GL2, IGRAPHICS_GLES2 etc or IGRAPHICS_METAL when using IGRAPHICS_NANOVG
+     #+END_VERSE
+     But see [[file:iPlug2/IGraphics/IGraphics_include_in_plug_hdr.h::IGRAPHICS_GL2]]
+     imported from
+     - IPlug_include_in_plug_hdr.h
+     - IPlugControls.h
+     - 
+
+	  #+BEGIN_SRC c
+     #elif defined IGRAPHICS_GL2 || defined IGRAPHICS_GL3
+       #define IGRAPHICS_GL     
+	  #+END_SRC
+
+	  and i'm defining =IGRAPHICS_GL2=
+	  temporarily added manually
+	  #+BEGIN_SRC meson
+     add_project_arguments('-DIGRAPHICS_GL', language : 'cpp')     
+	  #+END_SRC
+   - source files..
+     #+BEGIN_VERSE
+     cannot open source file "glad/glad.h"
+     #+END_VERSE
+
+
+
+   still have the problem with IGRAPHICS_GL..
+   
+** Comparison with existing example
+   #+BEGIN_VERSE
+   1>------ Build started: Project: IPlugControls-app, Configuration: Debug Win32 ------
+1>asio.cpp
+1>asiodrivers.cpp
+1>asiolist.cpp
+1>iasiothiscallresolver.cpp
+1>RtAudio.cpp
+1>RtMidi.cpp
+1>IControls.cpp
+1>IPopupMenuControl.cpp
+1>ITextEntryControl.cpp
+1>IControl.cpp
+1>IGraphics.cpp
+1>IGraphicsEditorDelegate.cpp
+1>IGraphicsWin.cpp
+1>IPlugAPP.cpp
+1>IPlugAPP_dialog.cpp
+1>IPlugAPP_host.cpp
+1>IPlugAPP_main.cpp
+1>IPlugAPIBase.cpp
+1>IPlugParameter.cpp
+1>IPlugPaths.cpp
+1>IPlugPluginBase.cpp
+1>IPlugProcessor.cpp
+1>IPlugTimer.cpp
+1>IPlugControls.cpp
+1>IPlugControls-app.vcxproj -> W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\app\Win32\Debug\IPlugControls.exe
+
+   #+END_VERSE
+
+   #+BEGIN_VERSE
+   1>------ Build started: Project: IPlugControls, Configuration: debug x64 ------
+1>IPlugControls.cpp
+1>IControl.cpp
+1>IGraphics.cpp
+1>IGraphicsEditorDelegate.cpp
+1>IControls.cpp
+1>IPopupMenuControl.cpp
+1>ITextEntryControl.cpp
+1>IGraphicsNanoVG.cpp
+1>W:\dev\_tmp\mesonIPlug\examples\IPlugControls\subprojects\iplug2\IGraphics\Drawing\IGraphicsNanoVG.h(28,31): fatal error C1189: #error:  you must define either IGRAPHICS_GL2, IGRAPHICS_GLES2 etc or IGRAPHICS_METAL when using IGRAPHICS_NANOVG
+
+   #+END_VERSE
+
+   ..and now it's building!
+   #+BEGIN_VERSE
+   Code	File	Line	Column
+2>IControl.cpp		60	11
+2>IPlugControls.cpp		5	16
+2>IGraphics.cpp		84	12
+2>IGraphicsEditorDelegate.cpp		118	26
+2>IControls.cpp		142	12
+2>IPopupMenuControl.cpp		173	20
+2>ITextEntryControl.cpp		198	20
+2>IGraphicsWin.cpp		222	15
+2>IPlugAPIBase.cpp		252	15
+2>IPlugParameter.cpp		271	17
+2>IPlugPaths.cpp		276	13
+2>IPlugPluginBase.cpp		278	18
+2>IPlugProcessor.cpp		293	17
+2>IPlugTimer.cpp		301	13
+2>IPlugAPP.cpp		302	11
+2>IPlugAPP_dialog.cpp		324	18
+2>IPlugAPP_host.cpp		359	16
+2>IPlugAPP_main.cpp		381	16
+2>RtAudio.cpp		405	10
+2>asio.cpp		406	7
+2>asiodrivers.cpp		407	14
+2>asiolist.cpp		408	11
+2>iasiothiscallresolver.cpp		409	24
+2>RtMidi.cpp		410	9
+
+   #+END_VERSE
+
+
+   
+*** Linker
+    working example
+    #+BEGIN_EXAMPLE
+    /OUT:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\app\Win32\Debug\IPlugControls.exe" /MANIFEST /NXCOMPAT /PDB:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\pdbs\IPlugControls-app_Win32.pdb" /DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"
+
+ /IMPLIB:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\app\Win32\Debug\int\IPlugControls.lib" /DEBUG:FASTLINK /MACHINE:X86 /PGD:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\app\Win32\Debug\IPlugControls.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\app\Win32\Debug\int\IPlugControls.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /LIBPATH:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\win\Win32\Debug" /LIBPATH:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IPlug\AAX_SDK\Libs\Debug" /LIBPATH:"C:\Program Files\Faust\lib" /TLBID:1 
+    #+END_EXAMPLE
+    
+    meson
+    #+BEGIN_EXAMPLE
+    /OUT:".\IPlugControls.exe" /MANIFEST "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "comdlg32.lib" "advapi32.lib" /RELEASE /IMPLIB:"IPlugControls.exe.lib" /DEBUG:FULL /MACHINE:X64 /INCREMENTAL /SUBSYSTEM:WINDOWS /NOLOGO 
+
+/DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /TLBID:1 
+    #+END_EXAMPLE

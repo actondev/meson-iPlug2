@@ -1,1 +1,5 @@
 build*/
+# /examples/
+# still testing
+/examples/nogui*
+/.vs/

@@ -1,0 +1,4 @@
+option('IGRAPHICS',
+       type: 'array',
+       value: ['IGRAPHICS_NANOVG','IGRAPHICS_GL2']
+      )
