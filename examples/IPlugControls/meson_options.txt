@@ -1,4 +1,6 @@
-option('IGRAPHICS',
-       type: 'array',
-       value: ['IGRAPHICS_NANOVG','IGRAPHICS_GL2']
-      )
+# if iplug2 was used as a subdir instead of subproject, the IGRAPHICS option should be stated here
+
+# option('IGRAPHICS',
+#        type: 'array',
+#        value: ['IGRAPHICS_NANOVG','IGRAPHICS_GL2']
+#       )

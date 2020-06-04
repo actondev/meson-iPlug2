@@ -50,7 +50,8 @@ mklink /J subprojects\iPlug2 ..\..\iPlug2
 meson setup --backend vs buildvs
 # note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
 # --reconfigure will not work
-meson buildvs --backend vs --wipe
+meson setup --wipe buildvs
+# normal reconfigure
 meson setup --reconfigure buildvs
 meson compile -C buildvs
 
