@@ -13,18 +13,23 @@ if meson.get_compiler('cpp').get_id() == 'msvc'
   # extra_args += ['/P']
 endif
 
-add_project_arguments('-DAPP_API', language : 'cpp')
+# add_project_arguments('-DAPP_API', language : 'cpp')
 add_project_arguments('-DIPLUG_DSP=1', language : 'cpp')
 add_project_arguments('-DIPLUG_EDITOR=1', language : 'cpp')
 add_project_arguments('-DNOMINMAX', language : 'cpp')
 add_project_arguments('-DWIN32', language : 'cpp')
+# needed ??
+add_project_arguments('-D_WIN32', language : 'cpp')
 add_project_arguments('-D__WINDOWS_DS__', language : 'cpp')
 add_project_arguments('-D__WINDOWS_MM__', language : 'cpp')
 add_project_arguments('-D__WINDOWS_ASIO__', language : 'cpp')
+
+# WIP VST3
+add_project_arguments('-D_WINDLL', language : 'cpp')
 subdir('src')
 
 iplug2_proj = subproject('iplug2',
-			 default_options: ['IGRAPHICS=IGRAPHICS_NANOVG,IGRAPHICS_GL2']
+			 default_options: ['IGRAPHICS=IGRAPHICS_NANOVG,IGRAPHICS_GL2',]
 			)
 iplug2_dep = iplug2_proj.get_variable('iplug2_dep')
 
@@ -43,11 +48,41 @@ link_args += '/DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib"
 link_args += '/TLBID:1'
 
 # executable()
-exe = executable('IPlugControls',
+
+# IPlugControls-APP
+# IPlugControls-VST3
+# etc..
+
+IPLUG_TARGET = iplug2_proj.get_variable('IPLUG_TARGET')
+
+if IPLUG_TARGET == 'APP'
+  add_project_arguments('-DAPP_API', language : 'cpp')
+elif IPLUG_TARGET == 'VST3'
+  add_project_arguments('-DVST3_API', language : 'cpp')
+endif
+
+exe_name = 'IPlugControls' + '-' + IPLUG_TARGET
+# exe = executable(exe_name,
+# 		 dependencies : [app_dep, iplug2_dep],
+# 		 link_args: link_args,
+# 		 cpp_args: extra_args,
+# 		 gui_app: true,
+# 		 install: true,
+# 		 implib: true
+# 		)
+
+# WIP dll
+
+# build_target()
+exe = shared_library(exe_name,
 		 dependencies : [app_dep, iplug2_dep],
 		 link_args: link_args,
 		 cpp_args: extra_args,
-		 gui_app: true,
+		 # gui_app: true,
 		 install: true,
-		 implib: true
+		 # implib gives error?
+		 # implib: true,
+		 name_suffix: 'vst3',
+		 # target_type : 'shared_library',
+		 vs_module_defs: 'subprojects/iPlug2/Dependencies/IPlug/VST3_SDK/public.sdk/source/main/winexport.def'
 		)

@@ -180,23 +180,20 @@ executable('dep_using_exe', 'main.c',
 
 * emacs snippet
 #+BEGIN_SRC emacs-lisp
-(defun aod.meson/sources (ext)
-  (interactive "sExtension: ")
-
-  (let ((marked-files nil))
-    (with-temp-buffer
-      (dired ".")
-      (dired-unmark-all-marks)
-      (setq marked-files (dired-mark-files-regexp ext))
-      (dired-copy-filename-as-kill)
-      (quit-window)
-      )
-    (if marked-files
-	(let* ((filenames (split-string (car kill-ring)))
-	       (formatted (mapconcat (function (lambda (x) (format "'%s',\n"x)))
-				     filenames
-				     " ")))
-	  (insert formatted)))))
+(defun aod.meson/sources (dir regexp)
+  (interactive "DDirectory:\nsRegexp: ")
+  (message dir)
+  (let* ((filenames (directory-files dir
+				     t ; full path
+				     regexp ;match
+				     nil	;nosort
+				     ))
+	 (formatted (mapconcat (function (lambda (x)
+					   (let ((relative-path (file-relative-name x ".")))
+					     (format "'%s',\n" relative-path))))
+			       filenames
+			       " ")))
+    (insert formatted)))
 #+END_SRC
 
 #+RESULTS:

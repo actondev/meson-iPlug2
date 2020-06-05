@@ -1,0 +1,287 @@
+* TODO <2020-06-05 Fri> vst
+  Some notes from IPlugControls-vst3.vcxproj.filters
+  #+BEGIN_EXAMPLE
+      <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstaudioeffect.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstbus.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstcomponent.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstcomponentbase.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstinitiids.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstparameters.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstsinglecomponenteffect.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\source\vst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\pluginview.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\memorystream.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\main\dllmain.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\baseiids.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\fbuffer.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\fdebug.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\fdynlib.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\fobject.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\fstreamer.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\fstring.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\timer.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\source\updatehandler.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\thread\source\flock.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\base\thread\source\fcondition.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\base\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\conststringtable.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\plugininterfaces\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\coreiids.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\plugininterfaces\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\funknown.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\plugininterfaces\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\ustring.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\plugininterfaces\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\main\pluginfactory.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\IPlug\IPlugPaths.cpp">
+      <Filter>IPlug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\IPlug\VST3\IPlugVST3.cpp">
+      <Filter>IPlug\VST3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\IPlug\VST3\IPlugVST3_ProcessorBase.cpp">
+      <Filter>IPlug\VST3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\commoniids.cpp">
+      <Filter>IPlug\VST3\VST3_SDK\public.sdk\common</Filter>
+    </ClCompile>
+
+  #+END_EXAMPLE
+
+  so, folders of interest
+  - Dependencies\IPlug\VST3_SDK\public.sdk\source\vst
+  - Dependencies\IPlug\VST3_SDK\public.sdk\source\common
+  - Dependencies\IPlug\VST3_SDK\public.sdk\source\main
+    dllmain.cpp
+  - Dependencies\IPlug\VST3_SDK\base\source
+  - Dependencies\IPlug\VST3_SDK\pluginterfaces\base
+  - IPlug\VST3
+    only headers?
+  - IPlug\VST3\VST3_SDK
+  - IPlug\APP
+    should NOT be included in vst build
+
+
+  directories in iPlug
+  #+BEGIN_SRC sh
+ls subprojects/iPlug2/IPlug/*/ -d
+  #+END_SRC
+
+  #+RESULTS:
+  | subprojects/iPlug2/IPlug/AAX/       |
+  | subprojects/iPlug2/IPlug/APP/       |
+  | subprojects/iPlug2/IPlug/AUv2/      |
+  | subprojects/iPlug2/IPlug/AUv3/      |
+  | subprojects/iPlug2/IPlug/Extras/    |
+  | subprojects/iPlug2/IPlug/ReaperExt/ |
+  | subprojects/iPlug2/IPlug/VST2/      |
+  | subprojects/iPlug2/IPlug/VST3/      |
+  | subprojects/iPlug2/IPlug/WEB/       |
+
+  so, let's add an option called target
+
+** troubleshooting
+   - Cannot open include file: 'vstgui/lib/platform/platform_win32.h':
+     ..removed some cpp
+   - linking
+     #+BEGIN_VERSE
+     5>   Creating library IPlugControls-VST3.exe.lib and object IPlugControls-VST3.exe.exp
+5>src_IPlugControls.cpp.obj : error LNK2019: unresolved external symbol "public: __cdecl Steinberg::FUID::FUID(unsigned long,unsigned long,unsigned long,unsigned long)" (??0FUID@Steinberg@@QEAA@KKKK@Z) referenced in function GetPluginFactory
+     #+END_VERSE
+
+
+   in vst project
+   #+BEGIN_EXAMPLE
+       <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\VST3_SDK\base\win\$(Platform)\$(Configuration)\;$(WDL_PATH)\IPlug\$(SolutionDir)build-win\$(Platform)\$(Configuration)\;$(WDL_PATH)\lice\$(SolutionDir)build-win\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>$(VST3_SDK)\public.sdk\source\main\winexport.def</ModuleDefinitionFile>
+    </Link>
+   #+END_EXAMPLE
+
+   =pluginterfaces/base/pluginbasefwd.h=
+   has the 
+   #+BEGIN_SRC c
+namespace Steinberg {
+
+class FUnknown;
+// .. etc
+
+}   
+   #+END_SRC
+
+** c++ args (given project)
+   #+BEGIN_EXAMPLE
+   /JMC /MP /GS /analyze- /W3 /wd"4996" /wd"4250" /wd"4018" /wd"4267" /wd"4068" /Zc:wchar_t /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IPlug\VST3" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IPlug\VST3_SDK" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\WDL" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IPlug" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IPlug\Extras" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IPlug\Extras\Synth" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IPlug\Extras\Faust" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\\resources" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IGraphics" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IGraphics\Controls" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IGraphics\Drawing" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IGraphics\Platforms" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\IGraphics\Extras" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\WDL\lice" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\NanoSVG\src" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\NanoVG\src" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\AGG\agg-2.4\include" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\AGG\agg-2.4\font_freetype" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\AGG\agg-2.4\include\util" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\AGG\agg-2.4\include\platform\win32" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\AGG\agg-2.4\src" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\AGG\agg-2.4\src\platform\win32" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\Cairo" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\WDL\libpng" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\WDL\zlib" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\freetype\include" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\STB" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\imgui" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\imgui\examples" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia\include\core" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia\include\effects" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia\include\config" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia\include\utils" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia\include\gpu" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\src\skia\experimental\svg\model" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\yoga" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\yoga\yoga" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\glad_GL2\include" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IGraphics\glad_GL2\src" /I"W:\dev\_vst\iPlug2\Examples\IPlugControls\" /ZI /Gm- /Od /Fd"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\int\vc142.pdb" /Zc:inline /fp:precise
+   /D "VST3_API"
+   /D "IPLUG_EDITOR=1"
+   /D "IPLUG_DSP=1"
+   /D "_DEBUG"
+   /D "IGRAPHICS_NANOVG"
+   /D "IGRAPHICS_GL2"
+   /D "WIN32"
+   /D "_CRT_SECURE_NO_DEPRECATE"
+   /D "_CRT_NONSTDC_NO_DEPRECATE"
+   /D "NOMINMAX"
+   /D "_WINDLL"
+   /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MTd /std:c++14 /FC /Fa"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\int\" /EHsc /nologo /Fo"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\int\" /Fp"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\int\IPlugControls.pch" /diagnostics:column 
+
+   #+END_EXAMPLE
+** linker args (given project)
+   #+BEGIN_EXAMPLE
+   /OUT:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\IPlugControls.vst3" /MANIFEST /NXCOMPAT /PDB:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\pdbs\IPlugControls-vst3_Win32.pdb"
+
+/DYNAMICBASE "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"
+
+/DEF:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\main\winexport.def" /IMPLIB:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\int\IPlugControls.lib" /DEBUG:FASTLINK /DLL /MACHINE:X86 /PGD:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\IPlugControls.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\vst3\Win32\Debug\int\IPlugControls.vst3.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO /LIBPATH:"..\..\VST3_SDK\base\win\Win32\Debug\" /LIBPATH:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\WDL\IPlug\W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\Win32\Debug\" /LIBPATH:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\WDL\lice\W:\dev\_vst\iPlug2\Examples\IPlugControls\build-win\Win32\Debug\" /LIBPATH:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\Build\win\Win32\Debug" /LIBPATH:"W:\dev\_vst\iPlug2\Examples\IPlugControls\projects\..\..\..\Dependencies\IPlug\AAX_SDK\Libs\Debug" /LIBPATH:"C:\Program Files\Faust\lib" /TLBID:1 
+   #+END_EXAMPLE
+** given project files
+   #+BEGIN_EXAMPLE
+IControl.cpp
+IControls.cpp
+IGraphics.cpp
+IGraphicsEditorDelegate.cpp
+IGraphicsWin.cpp
+IPlugAPIBase.cpp
+IPlugControls.cpp
+IPlugParameter.cpp
+IPlugPaths.cpp
+IPlugPluginBase.cpp
+IPlugProcessor.cpp
+IPlugTimer.cpp
+IPlugVST3.cpp
+IPlugVST3_ProcessorBase.cpp
+IPopupMenuControl.cpp
+ITextEntryControl.cpp
+baseiids.cpp
+commoniids.cpp
+conststringtable.cpp
+coreiids.cpp
+dllmain.cpp
+fbuffer.cpp
+fcondition.cpp
+fdebug.cpp
+fdynlib.cpp
+flock.cpp
+fobject.cpp
+fstreamer.cpp
+fstring.cpp
+funknown.cpp
+memorystream.cpp
+pluginfactory.cpp
+pluginview.cpp
+timer.cpp
+updatehandler.cpp
+ustring.cpp
+vstaudioeffect.cpp
+vstbus.cpp
+vstcomponent.cpp
+vstcomponentbase.cpp
+vstinitiids.cpp
+vstparameters.cpp
+vstsinglecomponenteffect.cpp
+   #+END_EXAMPLE
+** my compiled files
+   #+BEGIN_EXAMPLE
+IControl.cpp
+IControls.cpp
+IGraphics.cpp
+IGraphicsEditorDelegate.cpp
+IGraphicsWin.cpp
+IPlugAPIBase.cpp
+IPlugControls.cpp
+IPlugParameter.cpp
+IPlugPaths.cpp
+IPlugPluginBase.cpp
+IPlugProcessor.cpp
+IPlugTimer.cpp
+IPlugVST3.cpp
+IPlugVST3_ProcessorBase.cpp
+IPopupMenuControl.cpp
+ITextEntryControl.cpp
+baseiids.cpp
+commoniids.cpp
+conststringtable.cpp
+coreiids.cpp
+dllmain.cpp
+fbuffer.cpp
+fcondition.cpp
+fdebug.cpp
+fdynlib.cpp
+flock.cpp
+fobject.cpp
+fstreamer.cpp
+fstring.cpp
+funknown.cpp
+memorystream.cpp
+pluginfactory.cpp
+pluginview.cpp
+timer.cpp
+updatehandler.cpp
+ustring.cpp
+vstaudioeffect.cpp
+vstbus.cpp
+vstcomponent.cpp
+vstcomponentbase.cpp
+vstinitiids.cpp
+vstsinglecomponenteffect.cpp
+   #+END_EXAMPLE
+
+   have to remove
+   - IPlugVST3_Controller.cpp
+   - IPlugVST3_Processor.cpp
+   - threadchecker_linux.cpp
+   - threadchecker_win32.cpp
+   have to add
+   - conststringtable.cpp
+   - coreiids.cpp
+   - funknown.cpp
+   - ustring.cpp
+   - vstparameters.cpp
