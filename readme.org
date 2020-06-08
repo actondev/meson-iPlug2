@@ -7,5 +7,6 @@
   
 * Roadmap
   - [X] Build APP & VST3 on windows
-  - [ ] Adjust fork to use the script for VST3
+  - [X] Adjust fork to use the script for VST3 sdk
+    automatically downloading the VST3 sdk (can build out of the box)
   - [ ] Build on linux
