@@ -194,3 +194,116 @@ add_project_arguments('-DNO_IGRAPHICS', language : 'cpp')
 
 /DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /TLBID:1 
     #+END_EXAMPLE
+* <2020-06-08 Mon> linux
+** notes..
+  - https://github.com/iPlug2/iPlug2/blob/linux/IGraphics/IGraphics_include_in_plug_hdr.h
+  - 
+
+  #+BEGIN_SRC sh
+
+rm -r examples/IPlugControls/subprojects/iPlug2
+ln -s `pwd`/../iPlug2 `pwd`/examples/IPlugControls/subprojects/
+  #+END_SRC
+
+  ../subprojects/iPlug2/IPlug/IPlugTimer.h:31:10: fatal error: swell.h: No such file or directory
+
+  got an error from =VST3_SDK/base/source/fdebug.h=
+  #+BEGIN_SRC c
+#if !defined (DEVELOPMENT) && !defined (RELEASE) 
+	#ifdef _DEBUG
+		#define DEVELOPMENT 1
+	#elif defined (NDEBUG)
+		#define RELEASE 1
+	#else
+		#error DEVELOPMENT, RELEASE, _DEBUG, or NDEBUG  must be defined!
+	#endif
+#endif
+  #+END_SRC
+  
+
+  #+BEGIN_VERSE
+  subprojects/iPlug2/Dependencies/IGraphics/./xcbt/xcbt.c:30:10: fatal error: X11/Xlib-xcb.h: No such file or directory
+   30 | #include <X11/Xlib-xcb.h>
+      |          ^~~~~~~~~~~~~~~~
+
+  #+END_VERSE
+
+  searching for installed libs
+  #+BEGIN_SRC sh
+ldconfig -p | grep x11
+apt-cache search xcb | grep dev
+
+sudo apt-get install xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev
+  #+END_SRC
+
+  #+BEGIN_EXAMPLE
+  undefined reference to `dlopen'
+  #+END_EXAMPLE
+  -ldl
+
+  #+BEGIN_EXAMPLE
+  undefined reference to `gladLoadGLX'
+  #+END_EXAMPLE
+  #+BEGIN_SRC sh
+sudo apt-get install libglew-dev
+  #+END_SRC
+
+  link to libgl
+  #+BEGIN_SRC sh
+sudo apt install libgl1-mesa-glx   
+  #+END_SRC
+** notes v2
+   see
+   - common-linux.mk and
+   - Makefile
+
+   #+BEGIN_EXAMPLE
+_GLAD_PATH := $(_IGRAPHICS_DEPS_PATH)/glad_GL2
+	IPSRC_DIR += $(_GLAD_PATH)/src
+	IPINC_DIR += $(_GLAD_PATH)/include
+	_GLAD_GLX_PATH := $(_IGRAPHICS_DEPS_PATH)/glad_GLX
+	IPSRC_DIR += $(_GLAD_GLX_PATH)/src
+	IPINC_DIR += $(_GLAD_GLX_PATH)/include
+  IPSRC_DIR += $(_IGRAPHICS_DEPS_PATH)/xcbt
+
+   #+END_EXAMPLE
+** DONE trying the make file
+   [[file:~/dev/actondev/iPlug2/Examples/Makefile]]
+   #+BEGIN_SRC sh
+sudo apt-get install libtool autoconf
+   #+END_SRC
+   #+BEGIN_SRC sh :session *linux-make*
+cd ../iPlug2
+cd Examples/IPlugControls
+make -f ../Makefile
+
+make -f ../Makefile APP
+rm -r ../Build
+   #+END_SRC
+
+   #+BEGIN_EXAMPLE
+   Package gdk-3.0 was not found in the pkg-config search path
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+apt-cache search gdk
+
+# wtf? typo
+sudo apt install libgdk3.0-cil-dev
+
+apt-cache search libgtk
+
+sudo apt install libgtk-3-dev
+   #+END_SRC
+
+
+   #+BEGIN_EXAMPLE
+   Generating resource ...
+php /home/actondev/dev/actondev/iPlug2/WDL/swell/mac_resgen.php ../Build/Linux-x86_64/IPlugControls/APP/.obj/resources/main.rc
+make: php: Command not found
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+sudo apt install php
+   #+END_SRC
+   

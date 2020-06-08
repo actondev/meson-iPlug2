@@ -16,3 +16,18 @@ meson compile -C build-multiple
 # to cleanup/regenerate
 rm -rf build-multiple
    #+END_SRC
+
+* Linux (Ubuntu 20.04)
+** Multiple targets (APP & VST3)
+#+BEGIN_SRC sh :session *iplug-controls*
+meson setup build-multiple
+# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
+# --reconfigure will not work
+meson setup --wipe build-multiple
+# normal reconfigure
+meson setup --reconfigure build-multiple
+# meson compile -C build-multiple
+ninja -C build-multiple
+# to cleanup/regenerate
+rm -rf build-multiple
+   #+END_SRC

@@ -10,3 +10,51 @@
   - [X] Adjust fork to use the script for VST3 sdk
     automatically downloading the VST3 sdk (can build out of the box)
   - [ ] Build on linux
+* Getting started
+** Windows
+   Suggesting using [[https://www.msys2.org/][msys2]]
+
+   Installing meson & ninja
+   #+BEGIN_SRC sh
+pacman -Sy mingw64/mingw-w64-x86_64-meson mingw64/mingw-w64-x86_64-ninja
+   #+END_SRC
+** Ubuntu
+   #+BEGIN_SRC sh
+sudo apt update
+sudo apt-get install meson ninja-build
+   #+END_SRC
+
+   Other needed packages
+   #+BEGIN_SRC sh
+sudo apt-get install libfontconfig1-dev   
+   #+END_SRC
+   
+   #+BEGIN_SRC c :exports none
+// IGraphicsLinux.cpp
+#ifdef IGRAPHICS_GL
+#endif
+  #include <fontconfig/fontconfig.h>
+#endif   
+   #+END_SRC
+
+   
+
+   #+BEGIN_COMMENT
+   subprojects/iPlug2/Dependencies/IGraphics/./xcbt/xcbt.c:30:10: fatal error: X11/Xlib-xcb.h: No such file or directory
+   #+END_COMMENT
+   
+   #+BEGIN_SRC sh
+sudo apt install libx11-xcb-dev
+   #+END_SRC
+
+   #+BEGIN_COMMENT
+   ../subprojects/iPlug2/Dependencies/IGraphics/./xcbt/xcbt.c:48:10: fatal error: glad/glad_glx.h: No such file or directory
+   48 | #include <glad/glad_glx.h>
+      |          ^~~~~~~~~~~~~~~~~
+
+   #+END_COMMENT
+
+   #+BEGIN_SRC sh
+sudo apt install libglfw3-dev
+
+   #+END_SRC

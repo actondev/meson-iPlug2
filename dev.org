@@ -179,7 +179,7 @@ executable('dep_using_exe', 'main.c',
     - dependencies: [stdatomic_dependency],
 
 * emacs snippet
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun aod.meson/sources (dir regexp)
   (interactive "DDirectory:\nsRegexp: ")
   (message dir)
@@ -195,9 +195,6 @@ executable('dep_using_exe', 'main.c',
 			       " ")))
     (insert formatted)))
 #+END_SRC
-
-#+RESULTS:
-: aod\.meson/sources
 
   - dired-mark-files-containing-regexp 
     cpp
