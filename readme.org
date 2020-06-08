@@ -1,0 +1,11 @@
+* Meson iPlug
+  Creating audio plugins & standalone applications with the =iPlug= framework with =Meson= build system.
+
+  Currently the only example is the IPlugControls as seen on https://github.com/iPlug2/iPlug2/tree/4d7e86e7dacb35070f0bd3795b8bbc52a054a249/Examples/IPlugControls
+
+  Using my [[https://github.com/actonDev/iPlug2/tree/feature/meson_build][iPlug 2 fork]]
+  
+* Roadmap
+  - [X] Build APP & VST3 on windows
+  - [ ] Adjust fork to use the script for VST3
+  - [ ] Build on linux

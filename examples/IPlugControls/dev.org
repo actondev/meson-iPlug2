@@ -14,5 +14,5 @@ meson setup --reconfigure build-multiple
 meson compile -C build-multiple
 
 # to cleanup/regenerate
-rm -rf buildvs
+rm -rf build-multiple
    #+END_SRC

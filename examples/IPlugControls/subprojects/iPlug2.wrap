@@ -1,0 +1,5 @@
+[wrap-git]
+url = https://github.com/actonDev/iPlug2.git
+# revision = feature/meson_build
+# c35f2ca commit at the time of writing
+revision = feature/meson_build
