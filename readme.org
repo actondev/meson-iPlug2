@@ -10,3 +10,12 @@
   - [X] Adjust fork to use the script for VST3 sdk
     automatically downloading the VST3 sdk (can build out of the box)
   - [ ] Build on linux
+* Getting started
+  See more in the [[file:examples/IPlugControls/]] readme in how to build. The following instructions are about setting up the dev environment.
+** Windows
+   Suggesting using [[https://www.msys2.org/][msys2]]
+
+   Installing meson & ninja
+   #+BEGIN_SRC sh
+pacman -Sy mingw64/mingw-w64-x86_64-meson mingw64/mingw-w64-x86_64-ninja
+   #+END_SRC

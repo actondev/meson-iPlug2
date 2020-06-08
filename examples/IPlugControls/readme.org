@@ -1,0 +1,11 @@
+* IPlugControls
+** Building (Windows)
+   This following snippet supposes =visual studio= and =msys2= installed. The initial terminal is msys2 and later we use the =vcvarsall.bat= to make use of the =vs= backend in meson.
+ #+BEGIN_SRC sh :session *vs-iplug-controls*
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+meson setup --backend vs build-multiple
+meson compile -C build-multiple
+    #+END_SRC
+
+    And that's it! Note that in the =build-multiple= project you have the generated =Visual Studio= project so you can actually skip the =meson compile= command and build/run/debug the app from inside =Visual Studio=
