@@ -1,36 +1,17 @@
 * IPlugControls example
 * Windows
-** Standalone app
-
-   #+BEGIN_SRC sh :session *vs-iplug-controls*
-
+** Multiple targets (APP & VST3)
+#+BEGIN_SRC sh :session *vs-iplug-controls*
 # visual studio command prompts
 cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 mklink /J subprojects\iPlug2 ..\..\iPlug2
-meson setup --backend vs build-app
+meson setup --backend vs build-multiple
 # note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
 # --reconfigure will not work
-meson setup --wipe build-app
+meson setup --wipe build-multiple
 # normal reconfigure
-meson setup --reconfigure build-app
-meson compile -C build-app
-
-# to cleanup/regenerate
-rm -rf buildvs
-    
-   #+END_SRC
-** TODO VST
-   #+BEGIN_SRC sh :session *vs-iplug-controls*
-# visual studio command prompts
-cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
-mklink /J subprojects\iPlug2 ..\..\iPlug2
-meson setup --backend vs -Diplug2:IPLUG_TARGET=VST3 build-vst
-# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
-# --reconfigure will not work
-meson setup --wipe -Diplug2:IPLUG_TARGET=VST3 build-vst
-# normal reconfigure
-meson setup --reconfigure build-vst
-meson compile -C build-vst
+meson setup --reconfigure build-multiple
+meson compile -C build-multiple
 
 # to cleanup/regenerate
 rm -rf buildvs

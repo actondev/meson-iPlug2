@@ -1,4 +1,4 @@
-* TODO <2020-06-05 Fri> vst
+* DONE <2020-06-05 Fri> vst
   Some notes from IPlugControls-vst3.vcxproj.filters
   #+BEGIN_EXAMPLE
       <ClCompile Include="..\..\..\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstaudioeffect.cpp">
@@ -285,3 +285,17 @@ vstsinglecomponenteffect.cpp
    - funknown.cpp
    - ustring.cpp
    - vstparameters.cpp
+* TODO app & vst
+  - IPLUG_TARGET array option in project
+    - possible arguments: APP, VST..
+    - foreach of those, include iplug subproject passing the IPLUG_TARGET argument
+    - adding the -DAPP_API, _DVST3_API etc in the per target options
+  - like this I can have both the app and the vst3 in one vs solution
+  - see https://mesonbuild.com/Adding-arguments.html
+    =add_project_arguments= vs =executable('prog', 'prog.cc', *cpp_args* : [...])=
+  - https://mesonbuild.com/External-commands.html
+    check the =run_command= to get the vst sdk
+* TODO linux
+  - https://github.com/iPlug2/iPlug2/compare/master...linux
+  - https://github.com/iPlug2/iPlug2/issues/105
+     Linux support [help wanted] #105 

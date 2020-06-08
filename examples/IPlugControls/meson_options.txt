@@ -1,6 +1,18 @@
-# if iplug2 was used as a subdir instead of subproject, the IGRAPHICS option should be stated here
-
-# option('IGRAPHICS',
-#        type: 'array',
-#        value: ['IGRAPHICS_NANOVG','IGRAPHICS_GL2']
-#       )
+option('IPLUG_TARGETS',
+       type: 'array',
+       choices:
+	 # for now only tested with APP and VST3
+	 [
+	   # 'AAX',
+	   'APP',
+	   # 'AUv2',
+	   # 'AUv3',
+	   # 'ReaperExt',
+	   # 'VST2',
+	   'VST3',
+	   # 'WEB',
+	 ],
+       value: [
+	 'APP',
+	 'VST3'
+       ])
