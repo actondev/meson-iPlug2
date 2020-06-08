@@ -277,7 +277,8 @@ cd ../iPlug2
 cd Examples/IPlugControls
 make -f ../Makefile
 
-make -f ../Makefile APP
+make -f ../Makefile CLEAN
+
 rm -r ../Build
    #+END_SRC
 
@@ -307,3 +308,36 @@ make: php: Command not found
 sudo apt install php
    #+END_SRC
    
+** DONE can build IPlugControls.. but no window (couldn't attach gui)
+
+   #+BEGIN_EXAMPLE
+   trying to start audio stream @ 44100 sr, 512 buffer size
+indev = 0:PulseAudio
+outdev = 0:PulseAudio
+inputs = 0
+outputs = 2
+SWELL: swt 'IPlugControls'
+APP: Initial socket size: 1024x768
+IGraphics NanoVG @ 60 FPS
+couldn't attach gui
+SWELL: swt 'IPlugControls'
+SWELL: swt 'IPlugControls'
+
+   #+END_EXAMPLE
+   instead, in the built example with make
+
+   #+BEGIN_EXAMPLE
+trying to start audio stream @ 44100 sr, 512 buffer size
+indev = 0:hw:HDA Intel PCH,0
+outdev = 0:hw:HDA Intel PCH,0
+inputs = 0
+outputs = 2
+
+RtApiAlsa::getDeviceInfo: snd_pcm_open error for device (hw:1,0), Device or resource busy.
+
+APP: Initial socket size: 1024x768
+IGraphics NanoVG @ 60 FPS
+INFO: resized to 1024x768
+WARNING: parent is not resized, but I (should) have no control on it on X... XEMBED?
+
+   #+END_EXAMPLE

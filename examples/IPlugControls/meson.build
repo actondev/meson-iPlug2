@@ -25,9 +25,10 @@ if system == 'windows'
   link_args += '/TLBID:1'
 elif system == 'linux'
   link_args += ['-lpthread', '-lxcb', '-ldl', '-lGL',
+		'-lz', '-lexpat', '-lfreetype',
 		'-lfontconfig',
 		# '-lGLU',
-		'-lpulse', '-lpulse-simple']
+		'-lpulse', '-lpulse-simple', '-lasound']
   extra_args += ['-fpermissive']
   extra_args += ['-DIGRAPHICS_GL2']
 endif
