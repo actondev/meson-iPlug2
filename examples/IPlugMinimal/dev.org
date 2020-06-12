@@ -31,3 +31,8 @@ ninja -C build-multiple
 # to cleanup/regenerate
 rm -rf build-multiple
    #+END_SRC
+
+** VST3
+   #+BEGIN_SRC sh
+file build-multiple/libIPlugMinimal-VST3.vst3
+   #+END_SRC

@@ -26,7 +26,6 @@ elif system == 'linux'
 		# '-lGLU',
 		'-lpulse', '-lpulse-simple']
   extra_args += ['-fpermissive']
-  # extra_args += ['-DIGRAPHICS_GL2']
 endif
 
 targets = get_option('IPLUG_TARGETS')

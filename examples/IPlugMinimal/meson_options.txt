@@ -13,6 +13,6 @@ option('IPLUG_TARGETS',
 	   # 'WEB',
 	 ],
        value: [
-	 'APP',
-	 # 'VST3'
+	 # 'APP',
+	 'VST3'
        ])
