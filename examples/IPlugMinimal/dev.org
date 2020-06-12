@@ -1,0 +1,33 @@
+* IPlugMinimal example
+* TODO Windows
+** Multiple targets (APP & VST3)
+#+BEGIN_SRC sh :session *vs-iplug-controls*
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+mklink /J subprojects\iPlug2 ..\..\iPlug2
+meson setup --backend vs build-multiple
+# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
+# --reconfigure will not work
+meson setup --wipe build-multiple
+# normal reconfigure
+meson setup --reconfigure build-multiple
+meson compile -C build-multiple
+
+# to cleanup/regenerate
+rm -rf build-multiple
+   #+END_SRC
+
+* Linux (Ubuntu 20.04)
+** Multiple targets (APP & VST3)
+#+BEGIN_SRC sh :session *iplug-minimal*
+meson setup build-multiple
+# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
+# --reconfigure will not work
+meson setup --wipe build-multiple
+# normal reconfigure
+meson setup --reconfigure build-multiple
+# meson compile -C build-multiple
+ninja -C build-multiple
+# to cleanup/regenerate
+rm -rf build-multiple
+   #+END_SRC
