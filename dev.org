@@ -228,3 +228,10 @@ ps -W | grep -i iplug
    #+BEGIN_SRC sh
 taskkill //f //pid 8472
    #+END_SRC
+* Reaper & linux
+  [[file:~/.config/REAPER/]]
+
+  [[file:~/.config/REAPER/FXChains/IPlugMinimal.RfxChain]]
+  [[file:assets/IPlugMinimal.RfxChain]]
+  [[file:~/Documents/REAPER%20Media/test.rpp]]
+

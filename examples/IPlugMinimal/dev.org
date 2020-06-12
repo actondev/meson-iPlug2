@@ -36,3 +36,44 @@ rm -rf build-multiple
    #+BEGIN_SRC sh
 file build-multiple/libIPlugMinimal-VST3.vst3
    #+END_SRC
+
+* Reaper
+
+** Processing a file
+   Note: the given fxchain has the =gain= parameter set to =50%=
+   #+BEGIN_SRC sh
+~/Downloads/reaper_linux_x86_64/REAPER/reaper -batchconvert test/reaper.txt
+   #+END_SRC
+
+   #+BEGIN_COMMENT
+   [[file:test/reaper.txt]]
+   [[file:test/reaper.txt.log]]   
+   #+END_COMMENT
+
+** COMMENT tangling batch txt
+   #+NAME: white-noise
+   #+BEGIN_SRC emacs-lisp
+(file-truename "../../assets/white-noise.wav")
+   #+END_SRC
+
+   #+NAME: fxchain
+   #+BEGIN_SRC emacs-lisp
+(file-truename "../../assets/IPlugMinimal.RfxChain")
+   #+END_SRC
+
+   #+RESULTS: fxchain
+   : /home/actondev/dev/actondev/meson-iPlug2/assets/IPlugMinimal.RfxChain
+
+
+   Have to tangle this
+   #+BEGIN_SRC text :tangle test/reaper.txt :noweb yes
+<<white-noise()>>	test/out.wav
+<CONFIG
+  FXCHAIN '<<fxchain()>>'
+>
+   #+END_SRC
+
+   #+BEGIN_SRC sh :exports none
+# to generate sample file
+cp test/reaper.txt test/reaper.txt.example  
+   #+END_SRC
