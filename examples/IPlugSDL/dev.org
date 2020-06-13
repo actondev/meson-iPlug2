@@ -1,0 +1,87 @@
+#+PROPERTY: header-args  :session *iplug-sdl*
+
+* IPlugSDL example
+* TODO Windows
+** Multiple targets (APP & VST3)
+#+BEGIN_SRC sh :session *vs-iplug-controls*
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+mklink /J subprojects\iPlug2 ..\..\iPlug2
+meson setup --backend vs build-multiple
+# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
+# --reconfigure will not work
+meson setup --wipe build-multiple
+# normal reconfigure
+meson setup --reconfigure build-multiple
+meson compile -C build-multiple
+
+# to cleanup/regenerate
+rm -rf build-multiple
+   #+END_SRC
+
+* Linux (Ubuntu 20.04)
+** Multiple targets (APP & VST3)
+#+BEGIN_SRC sh :session *iplug-sdl*
+meson setup build-multiple
+# note: if we change the default_options passed in iplug2 subproject, we need to pass --wipe flag
+# --reconfigure will not work
+meson setup --wipe build-multiple
+# normal reconfigure
+meson setup --reconfigure build-multiple
+# meson compile -C build-multiple
+ninja -C build-multiple
+# to cleanup/regenerate
+rm -rf build-multiple
+   #+END_SRC
+** Launching app
+   #+BEGIN_SRC sh
+./build-multiple/IPlugSDL-APP
+   #+END_SRC
+** VST3
+   #+BEGIN_SRC sh
+file build-multiple/libIPlugSDL-VST3.vst3
+~/Downloads/reaper_linux_x86_64/REAPER/reaper test/IPlugSDL.RPP
+   #+END_SRC
+
+* Reaper
+  #+BEGIN_SRC sh :session *iplug-sdl*
+~/Downloads/reaper_linux_x86_64/REAPER/reaper test/IPlugSDL.RPP
+  #+END_SRC
+** Processing a file
+   Note: the given fxchain has the =gain= parameter set to =50%=
+   #+BEGIN_SRC sh
+~/Downloads/reaper_linux_x86_64/REAPER/reaper -batchconvert test/reaper.txt
+   #+END_SRC
+
+   #+BEGIN_COMMENT
+   [[file:test/reaper.txt]]
+   [[file:test/reaper.txt.log]]   
+   #+END_COMMENT
+
+** COMMENT tangling batch txt
+   #+NAME: white-noise
+   #+BEGIN_SRC emacs-lisp
+(file-truename "../../assets/white-noise.wav")
+   #+END_SRC
+
+   #+NAME: fxchain
+   #+BEGIN_SRC emacs-lisp
+(file-truename "../../assets/IPlugMinimal.RfxChain")
+   #+END_SRC
+
+   #+RESULTS: fxchain
+   : /home/actondev/dev/actondev/meson-iPlug2/assets/IPlugMinimal.RfxChain
+
+
+   Have to tangle this
+   #+BEGIN_SRC text :tangle test/reaper.txt :noweb yes
+<<white-noise()>>	test/out.wav
+<CONFIG
+  FXCHAIN '<<fxchain()>>'
+>
+   #+END_SRC
+
+   #+BEGIN_SRC sh :exports none
+# to generate sample file
+cp test/reaper.txt test/reaper.txt.example  
+   #+END_SRC

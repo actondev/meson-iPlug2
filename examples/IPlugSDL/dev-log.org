@@ -1,0 +1,16 @@
+* TODO SDL meson wrap?
+  #+BEGIN_SRC sh :session *iplug-sdl*
+meson wrap search sdl
+meson wrap status
+meson wrap install sdl2
+
+cat subprojects/sdl2.wrap
+  #+END_SRC
+
+  [[https://github.com/mesonbuild/sdl2/blob/2.0.3/meson.build]]
+* hwnd
+  
+  #+BEGIN_SRC c
+// /home/actondev/dev/actondev/iPlug2/IPlug/APP/IPlugAPP_dialog.cpp
+DLGRET IPlugAPPHost::MainDlgProc  
+  #+END_SRC

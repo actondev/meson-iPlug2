@@ -205,3 +205,29 @@ add_project_arguments('-DNO_IGRAPHICS', language : 'cpp')
   /usr/bin/ld: IPlugMinimal-VST3@sha/subprojects_iPlug2_Dependencies_IPlug_VST3_SDK_base_source_timer.cpp.o: in function `Steinberg::SystemTime::ZeroStartTicks::getTicks32()':
 /home/actondev/dev/actondev/meson-iPlug2/examples/IPlugMinimal/build-multiple/../subprojects/iPlug2/Dependencies/IPlug/VST3_SDK/base/source/timer.cpp:66: undefined reference to `Steinberg::SystemTime::getTicks64()'
   #+END_EXAMPLE
+** <2020-06-13 Sat> SDL window
+   useful files
+   - ../iPlug2/IPlug/IPlugEditorDelegate.h
+     #+BEGIN_SRC c
+virtual void* OpenWindow(void* pParent) { OnUIOpen(); return nullptr; }     
+     #+END_SRC
+
+** Swell
+   #+BEGIN_SRC c
+// WDL/swell/swell.cpp
+#ifdef __linux__
+
+// iPlug2/WDL/swell/swell-generic-headless.cpp
+HWND SWELL_CreateXBridgeWindow(HWND viewpar, void **wref, RECT *r)
+
+   #+END_SRC
+   - iPlug2/WDL/swell/swell-generic-headless.cpp
+     this one is called..
+* Linux IDE?
+  - gnome builder
+    #+BEGIN_SRC sh
+apt-cache search builder
+sudo apt-get install gnome-builder
+    #+END_SRC
+
+    https://wiki.eclipse.org/CDT/Meson/User_Guide
