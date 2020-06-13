@@ -1,3 +1,4 @@
+#+PROPERTY: header-args  :session *iplug-sdl*
 * TODO SDL meson wrap?
   #+BEGIN_SRC sh :session *iplug-sdl*
 meson wrap search sdl
@@ -14,3 +15,80 @@ cat subprojects/sdl2.wrap
 // /home/actondev/dev/actondev/iPlug2/IPlug/APP/IPlugAPP_dialog.cpp
 DLGRET IPlugAPPHost::MainDlgProc  
   #+END_SRC
+
+* eclipse & meson
+
+** setup
+   managed to make it work as an eclipse meson project using eclipse 2020.3
+   maybe by manually adding cpp and meson natures, I don't need these ready files..
+   [[file:.cproject]]
+   #+BEGIN_SRC xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.settings">
+        		
+        <cconfiguration id="org.eclipse.cdt.core.default.config.1574687895">
+            			
+            <storageModule buildSystemId="org.eclipse.cdt.core.defaultConfigDataProvider" id="org.eclipse.cdt.core.default.config.1574687895" moduleId="org.eclipse.cdt.core.settings" name="Configuration">
+                				
+                <externalSettings/>
+                				
+                <extensions/>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            		
+        </cconfiguration>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.pathentry">
+        		
+        <pathentry kind="src" path=""/>
+        		
+        <pathentry kind="out" path="build"/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+    
+</cproject>  
+   #+END_SRC
+
+
+   [[file:.project]]
+   #+BEGIN_SRC xml
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>testmeson</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.core.cBuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.meson.core.mesonNature</nature>
+	</natures>
+</projectDescription>
+  
+   #+END_SRC
+** debugging
+   #+BEGIN_QUOTE
+   No source available for "main()
+   #+END_QUOTE
+   tried =configure -Dcpp_debugstl=true=
+   (using the meson options, clicked debug stl)
+
+   ha! there was another option, simply called =debug=
+   =configure -Ddebug=true=
+
+   and yes! I can use the debugger

@@ -56,7 +56,6 @@ void* IPlugSDL::OpenWindow(void* pParent)
     printf("hpar 2 %p\n", hpar);
   }
 
-  printf("m_oswindow is %p\n", hwnd->m_oswindow);
   window = SDL_CreateWindowFrom(hwnd);
   // window = SDL_CreateWindow(
   // 			    "hello_sdl2",
