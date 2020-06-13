@@ -1,0 +1,4 @@
+test/in.wav	test/out.wav
+<CONFIG
+  FXCHAIN 'test/IPlugMinimal.RfxChain'
+>
