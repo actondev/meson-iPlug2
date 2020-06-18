@@ -55,25 +55,25 @@ imgui = subproject('imgui',
 
 imgui_dep = imgui.get_variable('imgui_dep')
 
-if targets.contains('APP')
-  iplug2_APP_args = iplug2_proj.get_variable('args_common') + iplug2_proj.get_variable('args_APP')
-  message('Target APP, adding cpp_args ' + ','.join(iplug2_APP_args))
+# if targets.contains('APP')
+#   iplug2_APP_args = iplug2_proj.get_variable('args_common') + iplug2_proj.get_variable('args_APP')
+#   message('Target APP, adding cpp_args ' + ','.join(iplug2_APP_args))
 
-  app = executable(
-    'IPlugImgui-APP',
-    dependencies : [
-      app_dep,
-      iplug2_proj.get_variable('iplug2_APP_dep'),
-      sdl2_dep,
-      imgui_dep
-    ],
-    link_args: link_args,
-    cpp_args: extra_args + iplug2_APP_args,
-    gui_app: true,
-    install: true,
-    implib: true,
-  )
-endif
+#   app = executable(
+#     'IPlugImgui-APP',
+#     dependencies : [
+#       app_dep,
+#       iplug2_proj.get_variable('iplug2_APP_dep'),
+#       sdl2_dep,
+#       imgui_dep
+#     ],
+#     link_args: link_args,
+#     cpp_args: extra_args + iplug2_APP_args,
+#     gui_app: true,
+#     install: true,
+#     implib: true,
+#   )
+# endif
 
 if targets.contains('VST3')
   iplug2_VST3_args = iplug2_proj.get_variable('args_common') + iplug2_proj.get_variable('args_VST3')
@@ -84,7 +84,8 @@ if targets.contains('VST3')
     dependencies : [
       app_dep,
       iplug2_proj.get_variable('iplug2_VST3_dep'),
-      sdl2_dep
+      sdl2_dep,
+      imgui_dep,
     ],
     link_args: link_args,
     cpp_args: extra_args + iplug2_VST3_args,

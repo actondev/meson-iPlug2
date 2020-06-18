@@ -2,6 +2,9 @@
 
 #include "IPlug_include_in_plug_hdr.h"
 #include "SDL.h"
+#include "imgui_impl_sdl.h"
+#include "imgui_impl_opengl2.h"
+#include "SDL_opengl.h"
 
 const int kNumPrograms = 1;
 
