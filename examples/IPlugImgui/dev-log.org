@@ -1,0 +1,62 @@
+#+PROPERTY: header-args  :session *iplug-imgui*
+* imgui meson 
+  #+BEGIN_SRC sh
+meson wrap search imgui
+meson wrap status
+meson wrap install imgui
+
+cat subprojects/sdl2.wrap
+  #+END_SRC
+  https://github.com/mesonbuild/imgui/blob/1.76/meson.build
+
+** DONE sdl dependency not found problem
+   the =meson.override_dependency= fixed it
+   #+BEGIN_SRC meson
+sdl2_proj = subproject('sdl2')
+sdl2_dep = sdl2_proj.get_variable('sdl2_dep')
+
+# imgui searched for sdl
+# https://mesonbuild.com/Reference-manual.html#dependency
+meson.override_dependency('sdl', sdl2_dep)
+
+imgui = subproject('imgui',
+		  default_options: ['sdl=enabled'])
+   
+   #+END_SRC
+** DONE windows troubleshooting SSL
+   #+BEGIN_SRC sh :results output
+meson wrap search imgui
+   #+END_SRC
+  
+   #+BEGIN_EXAMPLE
+  ERROR: WrapDB connection failed to https://wrapdb.mesonbuild.com/v1/query/byname/imgui with error <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1108)>
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+pacman -Ss cert
+pacman -S mingw-w64-x86_64-ca-certificates # nah had it already
+pacman -S mingw64/mingw-w64-x86_64-python-certifi # nope
+pacman -S mingw64/mingw-w64-x86_64-python-wincertstore # nope
+pacman -S mingw64/mingw-w64-x86_64-python
+   #+END_SRC
+
+   #+BEGIN_EXAMPLE sh
+which python
+/c/Python37/python
+   #+END_EXAMPLE
+   maybe it has to do with this? from msys2 i'm using the windows version of python
+
+   #+BEGIN_SRC sh :results output
+echo $PATH
+   #+END_SRC
+
+   #+RESULTS:
+   : /c/Python37/Scripts:/c/Python37:
+   : ....
+   : /mingw64/bin:/usr/local/bin:/usr/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+   So.. fix the path, add the msys first
+   (fixed in emacs where I was setting the path)
+
+
+   

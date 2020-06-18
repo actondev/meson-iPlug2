@@ -1,0 +1,25 @@
+#+PROPERTY: header-args  :session *sh-IPlugImgui*
+* IPlugImgui example
+* Windows
+** Building
+#+BEGIN_SRC sh :session *vs-iplug-sdl*
+# visual studio command prompts
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+mklink /J subprojects\iPlug2 ..\..\iPlug2
+
+meson setup --backend vs build
+meson compile -C build
+
+# more commands
+meson setup --wipe build
+meson setup --reconfigure build
+rm -rf build
+   #+END_SRC
+
+** Launching VST3
+   #+BEGIN_SRC sh
+file IPlugImgui-VST3.vst3
+/w/DAW/Reaper/reaper.exe
+
+/w/portables/vsthostx64/vsthost.exe //noload $(cygpath -a -w build/IPlugImgui-VST3.vst3)
+   #+END_SRC
