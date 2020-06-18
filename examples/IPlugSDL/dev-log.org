@@ -92,3 +92,17 @@ DLGRET IPlugAPPHost::MainDlgProc
    =configure -Ddebug=true=
 
    and yes! I can use the debugger
+* huh.. cannot build vst?
+  #+BEGIN_EXAMPLE
+  subprojects/iPlug2/WDL/swell/swell-internal.h:33:3: error: ‘LPARAM’ does not name a type
+   33 |   LPARAM m_param;
+      |   ^~~~~~
+
+  #+END_EXAMPLE
+  =typedef LONG_PTR LPARAM;=
+  [[file:~/dev/actondev/iPlug2/WDL/swell/swell-types.h::typedef%20LONG_PTR%20LPARAM;]]
+
+  
+
+  aaah the problem was the
+  =// #include "swell-internal.h"= line in my "main" cpp file

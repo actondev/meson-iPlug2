@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IPlug_include_in_plug_hdr.h"
+#include <SDL2/SDL.h>
 
 const int kNumPrograms = 1;
 
@@ -14,6 +15,8 @@ using namespace iplug;
 
 class IPlugSDL : public Plugin
 {
+private:
+  SDL_Window* p_window;
 public:
   IPlugSDL(const InstanceInfo& info);
 
@@ -23,5 +26,6 @@ public:
 
 #if IPLUG_EDITOR // http://bit.ly/2S64BDd
 	void* OpenWindow(void* pParent);
+        void CloseWindow();
 #endif
 };
