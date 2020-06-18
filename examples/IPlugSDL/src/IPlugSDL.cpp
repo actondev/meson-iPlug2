@@ -24,33 +24,63 @@ void IPlugSDL::ProcessBlock(sample **inputs, sample **outputs, int nFrames) {
 
 #if IPLUG_EDITOR // http://bit.ly/2S64BDd
 int IPlugSDL::guiLoop(void *pointer) {
-	IPlugSDL* that = (IPlugSDL*) pointer;
+	IPlugSDL *that = (IPlugSDL*) pointer;
 	printf("gui loop\n");
 
 	//Event handler
 	SDL_Event e;
 
 	printf("gui loop window %p\n", that->pParent);
+
+	// the creation of window hangs after the first closing & reopening the vst editor
 	that->p_window = SDL_CreateWindowFrom(that->pParent);
+	printf("created sdl window\n");
+
+	// that->p_window->flags |= SDL_WINDOW_OPENGL;
+	SDL_Renderer *renderer = NULL;
+//	renderer = SDL_GetRenderer(that->p_window);
+//	printf("got window from renderer? %p", renderer);
+	renderer = SDL_CreateRenderer(that->p_window, -1,
+			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	printf("with renderer %p\n", renderer);
+
 	//While application is running
 	while (that->m_guiOpen) {
-	  printf("gui loop: drawing\n");
+		printf("gui loop: drawing\n");
 		//Handle events on queue
 		while (SDL_PollEvent(&e) != 0) {
+			printf("got event\n");
 			//User requests quit
-			if (e.type == SDL_QUIT) {
-				quit = true;
-				printf("SDL_QUIT\n");
+			switch (e.type) {
+			case SDL_QUIT:
+				printf("SDL_QUIT ?? I don't think I'd ever get this");
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				printf("mouse button down!\n");
+				break;
 			}
 		}
 
-		SDL_Surface *screenSurface = SDL_GetWindowSurface(that->p_window);
-		SDL_FillRect(screenSurface, NULL,
-				SDL_MapRGB(screenSurface->format, 0xBA, 0xDA, 0x55));
-		SDL_UpdateWindowSurface (that->p_window);
+		SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0xFF, 0xFF);
+
+		SDL_RenderClear(renderer);
+
+		SDL_Rect fillRect = { 20, 20, 100, 100 };
+		SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+		SDL_RenderFillRect(renderer, &fillRect);
+
+		SDL_RenderPresent(renderer);
+
+//		SDL_Surface *screenSurface = SDL_GetWindowSurface(that->p_window);
+//		SDL_FillRect(screenSurface, NULL,
+//				SDL_MapRGB(screenSurface->format, 0xBA, 0xDA, 0x55));
+//		SDL_UpdateWindowSurface(that->p_window);
 		SDL_Delay(100);
 
 	}
+
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(that->p_window);
 	printf("gui closed\n");
 	return 0;
 
@@ -59,14 +89,14 @@ void* IPlugSDL::OpenWindow(void *pParent) {
 	this->pParent = pParent;
 	// shit.. pParent is null ??
 	printf("IPlugSDL::OpenWindow window %p\n", pParent);
-		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
 		return 1;
 	}
-		printf("done: sdl init\n");
+	printf("done: sdl init\n");
 
 	m_guiOpen = true;
-	SDL_CreateThread( guiLoop, "GuiThread", this );
+	SDL_CreateThread(guiLoop, "GuiThread", this);
 
 	printf("after create thread...\n");
 

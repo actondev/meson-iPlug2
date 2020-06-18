@@ -92,7 +92,7 @@ DLGRET IPlugAPPHost::MainDlgProc
    =configure -Ddebug=true=
 
    and yes! I can use the debugger
-* huh.. cannot build vst?
+* DONE huh.. cannot build vst?
   #+BEGIN_EXAMPLE
   subprojects/iPlug2/WDL/swell/swell-internal.h:33:3: error: ‘LPARAM’ does not name a type
    33 |   LPARAM m_param;
@@ -106,3 +106,7 @@ DLGRET IPlugAPPHost::MainDlgProc
 
   aaah the problem was the
   =// #include "swell-internal.h"= line in my "main" cpp file
+* TODO cannot get any kind of SDL events
+* TODO cannot create SDL window a 2nd time
+  - the 1st time it's ok, I create the window the loop is running
+  - the 2nd time though the =SDL_CreateWindowFrom= call hangs
