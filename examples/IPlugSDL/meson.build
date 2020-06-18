@@ -20,6 +20,7 @@ if system == 'windows'
   # just copied that from the provided examples
   link_args += '/DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib"'
   link_args += '/TLBID:1'
+  extra_args += ['-fpermissive']
 elif system == 'linux'
   link_args += ['-lpthread', '-lxcb', '-ldl', '-lGL',
 		'-lfontconfig',

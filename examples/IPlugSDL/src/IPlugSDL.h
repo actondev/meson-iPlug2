@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IPlug_include_in_plug_hdr.h"
-#include <SDL2/SDL.h>
+#include "SDL.h"
 
 const int kNumPrograms = 1;
 

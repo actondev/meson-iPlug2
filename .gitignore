@@ -3,6 +3,8 @@ build*/
 # still testing
 /examples/nogui*
 
+iPlug2/
+
 # have a problem with these ignores
 # cause I also have some symlinks that I don't want to include
 # so it's not just subfolders

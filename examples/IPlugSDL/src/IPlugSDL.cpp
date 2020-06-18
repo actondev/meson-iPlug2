@@ -91,7 +91,7 @@ void* IPlugSDL::OpenWindow(void *pParent) {
 	printf("IPlugSDL::OpenWindow window %p\n", pParent);
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
-		return 1;
+		return NULL;
 	}
 	printf("done: sdl init\n");
 
