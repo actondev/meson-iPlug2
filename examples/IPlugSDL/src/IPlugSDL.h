@@ -16,7 +16,7 @@ using namespace iplug;
 class IPlugSDL : public Plugin
 {
 private:
-  SDL_Window* p_window;
+
 public:
   IPlugSDL(const InstanceInfo& info);
 
@@ -25,6 +25,10 @@ public:
 #endif
 
 #if IPLUG_EDITOR // http://bit.ly/2S64BDd
+  SDL_Window* p_window;
+  bool m_guiOpen;
+  void *pParent;
+  static int guiLoop(void* data);
 	void* OpenWindow(void* pParent);
         void CloseWindow();
 #endif
