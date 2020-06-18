@@ -2,5 +2,14 @@ build*/
 # /examples/
 # still testing
 /examples/nogui*
-/examples/*/subprojects/**/*
+
+# have a problem with these ignores
+# cause I also have some symlinks that I don't want to include
+# so it's not just subfolders
+# which would be **/subprojects/*/
+**/subprojects/*
+
+# un-ignoring specific file extensions
+!**/subprojects/*.wrap
+
 /.vs/
