@@ -1,9 +1,9 @@
-#+PROPERTY: header-args  :session *iplug-sdl*
+#+PROPERTY: header-args  :session *sh-IPlugSDL*
 
 * IPlugSDL example
 * TODO Windows
 ** Building
-#+BEGIN_SRC sh :session *vs-iplug-sdl*
+#+BEGIN_SRC sh
 # visual studio command prompts
 cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 mklink /J subprojects\iPlug2 ..\..\iPlug2

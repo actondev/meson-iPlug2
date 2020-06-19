@@ -2,7 +2,7 @@
 #define PLUG_MFR "AcmeInc"
 #define PLUG_VERSION_HEX 0x00010000
 #define PLUG_VERSION_STR "1.0.0"
-#define PLUG_UNIQUE_ID 'W9Hq'
+#define PLUG_UNIQUE_ID 'a9Hq'
 #define PLUG_MFR_ID 'Acme'
 #define PLUG_URL_STR "https://iplug2.github.io"
 #define PLUG_EMAIL_STR "spam@me.com"
