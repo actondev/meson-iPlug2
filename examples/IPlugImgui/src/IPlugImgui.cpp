@@ -2,6 +2,7 @@
 #include "IPlug_include_in_plug_src.h"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
+#include "SDL_video.h"
 
 IPlugImgui::IPlugImgui(const InstanceInfo &info) :
 		Plugin(info, MakeConfig(kNumParams, kNumPrograms)) {
@@ -27,13 +28,10 @@ int IPlugImgui::guiLoop(void *pointer) {
 	IPlugImgui *that = (IPlugImgui*) pointer;
 	printf("gui loop\n");
 
-	//Event handler
-	SDL_Event e;
-
 	printf("gui loop window %p\n", that->pParent);
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		printf("Error: %s\n", SDL_GetError());
 		return 1;
 	}
 
@@ -45,8 +43,6 @@ int IPlugImgui::guiLoop(void *pointer) {
 
 	SDL_Window* dummyWin = SDL_CreateWindow("", 0, 0, 1, 1, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
 
-	// the creation of window hangs after the first closing & reopening the vst editor
-
 	char sBuf[32];
 	sprintf_s<32>(sBuf, "%p", dummyWin);
 	printf("Setting hint SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT to %s\n", sBuf);
@@ -55,11 +51,11 @@ int IPlugImgui::guiLoop(void *pointer) {
 	SDL_Window* window = SDL_CreateWindowFrom(that->pParent);
 	SDL_SetHint(SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT, nullptr);
 
+	// if I create & display in a normal/separate window, I can have mouse input & all works normally
+	// SDL_Window* window = SDL_CreateWindow("", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+
 	that->p_window = window;
 	
-
-	// SDL_WindowFlags();
-
 	printf("created sdl window\n");
 
 	SDL_GLContext gl_context = SDL_GL_CreateContext(window);
@@ -81,19 +77,30 @@ int IPlugImgui::guiLoop(void *pointer) {
 
 	//While application is running
 	while (that->m_guiOpen) {
-
+		
+		
+		//Event handler
+		SDL_Event e;
 
 		//Handle events on queue
 		while (SDL_PollEvent(&e) != 0) {
-			printf("got event!\n");
-			ImGui_ImplSDL2_ProcessEvent(&e);
+			
 			//User requests quit
 			switch (e.type) {
 			case SDL_QUIT:
 				printf("SDL_QUIT ?? I don't think I'd ever get this");
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				printf("mouse button down!\n");
+			case SDL_MOUSEBUTTONUP:
+				// ImGui_ImplSDL2_ProcessEvent(&e);
+				fprintf(stderr, "Mouse down/up at (%d,%d)\n",
+					e.motion.x, e.motion.y);
+				break;
+			case SDL_MOUSEMOTION:
+				// hack to make thing imgui that window has focus -> handles mouse etc
+				SDL_RaiseWindow(window);
+				/*fprintf(stderr, "Mouse moved at (%d,%d)\n",
+					e.motion.x, e.motion.y);*/
 				break;
 			}
 		}
@@ -113,7 +120,6 @@ int IPlugImgui::guiLoop(void *pointer) {
 		SDL_GL_SwapWindow(window);
 
 		// SDL_Delay(10);
-
 	}
 
 	ImGui_ImplOpenGL2_Shutdown();
@@ -127,7 +133,6 @@ int IPlugImgui::guiLoop(void *pointer) {
 
 	printf("gui closed\n");
 	return 0;
-
 }
 void IPlugImgui::guiInit()
 {

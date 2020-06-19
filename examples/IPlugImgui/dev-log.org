@@ -60,7 +60,7 @@ echo $PATH
 
 
    
-* TODO actually display imgui
+* DONE actually display imgui
   https://github.com/ocornut/imgui/blob/master/examples/example_sdl_opengl2/main.cpp
 
   #+BEGIN_EXAMPLE
@@ -70,3 +70,10 @@ echo $PATH
   huh.. why the fuck it's not building the static library? I only have a dll
   - [ ] temprorarily edited the meson.build of imgui to state a static library
     yup.. no I have a =.a= and the project built successfully
+* TODO imgui in embedded VST3 window cannot handle mouse input?
+  I think that's the problem
+  #+BEGIN_SRC cpp
+    if (SDL_GetWindowFlags(g_Window) & SDL_WINDOW_INPUT_FOCUS)
+        io.MousePos = ImVec2((float)mx, (float)my);
+  
+  #+END_SRC
