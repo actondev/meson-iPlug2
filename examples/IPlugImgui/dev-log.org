@@ -70,10 +70,20 @@ echo $PATH
   huh.. why the fuck it's not building the static library? I only have a dll
   - [ ] temprorarily edited the meson.build of imgui to state a static library
     yup.. no I have a =.a= and the project built successfully
-* TODO imgui in embedded VST3 window cannot handle mouse input?
+* DONE imgui in embedded VST3 window cannot handle mouse input?
   I think that's the problem
   #+BEGIN_SRC cpp
     if (SDL_GetWindowFlags(g_Window) & SDL_WINDOW_INPUT_FOCUS)
         io.MousePos = ImVec2((float)mx, (float)my);
   
   #+END_SRC
+* DONE linux : cannot embed imgui (floating works fine)
+  [[file:subprojects/iPlug2/Dependencies/IPlug/VST3_SDK/pluginterfaces/gui/iplugview.h::X11EmbedWindowID]]
+   [[file:subprojects/sdl2/src/video/x11/SDL_x11window.c::X11_CreateWindowFrom(_THIS,%20SDL_Window%20*%20window,%20const%20void%20*data)]]
+
+* TODO linux embed: crashes after reopening x times
+  1. 1st time ok
+  2. weird fonts
+  3. no window
+  4. crashes :)
+* TODO linux embed: no mouse

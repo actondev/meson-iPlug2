@@ -26,10 +26,17 @@ if system == 'windows'
   # it dones't just work if I add this link arg in my vst/exe target
   add_global_link_arguments('/DYNAMICBASE "opengl32.lib"', language: 'cpp')
 elif system == 'linux'
-  link_args += ['-lpthread', '-lxcb', '-ldl', '-lGL',
+  link_args += ['-lpthread',
+		'-lxcb',
+		'-ldl',
+		'-lGL',
 		'-lfontconfig',
 		# '-lGLU',
-		'-lpulse', '-lpulse-simple']
+		'-lpulse',
+		'-lpulse-simple',
+	       ]
+  # needed for compiling subprojects/imgui-1.76/examples/imgui_impl_opengl2.cpp
+  add_global_link_arguments('-lGL', language: 'cpp')
   extra_args += ['-fpermissive']
 endif
 

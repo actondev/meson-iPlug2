@@ -44,15 +44,22 @@ int IPlugImgui::guiLoop(void *pointer) {
 	SDL_Window* dummyWin = SDL_CreateWindow("", 0, 0, 1, 1, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
 
 	char sBuf[32];
-	sprintf_s<32>(sBuf, "%p", dummyWin);
+	sprintf(sBuf, "%p", dummyWin);
+	printf("dummy window %p\n", dummyWin);
+
 	printf("Setting hint SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT to %s\n", sBuf);
 	SDL_SetHint(SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT, sBuf);
+
+    const char *hint = SDL_GetHint(SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT);
 
 	SDL_Window* window = SDL_CreateWindowFrom(that->pParent);
 	SDL_SetHint(SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT, nullptr);
 
+	int flags = SDL_GetWindowFlags( window );
+	printf("window has opengl flag? %s\n", (flags & SDL_WINDOW_OPENGL) ? "true" : "false");
+
 	// if I create & display in a normal/separate window, I can have mouse input & all works normally
-	// SDL_Window* window = SDL_CreateWindow("", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+	//SDL_Window* window = SDL_CreateWindow("", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 
 	that->p_window = window;
 	

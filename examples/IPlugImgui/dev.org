@@ -1,4 +1,4 @@
-#+PROPERTY: header-args  :session *sh-IPlugImgui*
+#+PROPERTY: header-args :session *sh-IPlugImgui* :var root=(projectile-project-root)
 * IPlugImgui example
 * Windows
 ** Building
@@ -26,3 +26,64 @@ ls IPlugImgui-VST3.vst3
 /w/portables/vsthostx64/vsthost.exe //noload $(cygpath -a -w build/IPlugImgui-VST3.vst3)
 /w/DAW/Reaper/reaper.exe
    #+END_SRC
+* Linux
+  Optional: using an existing =iPlug2= repo
+  #+BEGIN_SRC sh
+ln -s `readlink -f ../../../iPlug2` subprojects/iPlug2
+  #+END_SRC
+** Building
+#+BEGIN_SRC sh
+meson setup build
+ninja -C build
+
+# more commands
+meson setup --reconfigure build
+meson setup --wipe build
+rm -rf build
+   #+END_SRC
+** Running VST3
+   #+BEGIN_SRC sh :session *sh-IPlugImgui-run*
+file build/libIPlugImgui-VST3.vst3
+~/Downloads/reaper_linux_x86_64/REAPER/reaper
+   #+END_SRC
+*** troubleshooting
+    <2020-06-22 Mon> 
+    #+BEGIN_EXAMPLE
+    meson.build:49:6: ERROR: Unknown method "override_dependency" in object.
+    #+END_EXAMPLE
+
+    #+BEGIN_QUOTE
+    override_dependency(name, dep_object) (Added 0.54.0) specifies
+    #+END_QUOTE
+
+    #+BEGIN_SRC sh
+meson -v
+    #+END_SRC
+
+    #+RESULTS:
+    : 0.53.2
+
+
+
+    #+RESULTS:
+    |                                             |
+    | $ /home/actondev/dev/actondev/meson-iPlug2/ |
+
+    crap
+    #+BEGIN_SRC sh
+sudo apt-get remove meson
+sudo apt install python3-pip
+sudo pip3 install meson
+meson -v # 0.54.3
+    #+END_SRC
+*** fork of SDL2
+    #+BEGIN_SRC sh
+echo $root
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+ls -alh subprojects
+rm -rf subprojects/sdl2
+echo `readlink -f $root/../SDL`
+ln -s `readlink -f $root/../SDL` subprojects/sdl2
+    #+END_SRC
