@@ -341,3 +341,165 @@ INFO: resized to 1024x768
 WARNING: parent is not resized, but I (should) have no control on it on X... XEMBED?
 
    #+END_EXAMPLE
+* DONE Meson --backend vs : Visual Studio command prompt
+
+  https://stackoverflow.com/questions/45821276/source-vsdevcmd-bat-from-cygwin
+
+  #+BEGIN_SRC sh :session *vs-cmd*
+cmd //k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+meson setup buildvs --backend vs
+meson buildvs --backend vs --reconfigure
+meson compile -C buildvs
+
+# to cleanup/regenerate
+rm -rf buildvs
+  #+END_SRC
+
+  Now I can run in this session any msys2 program (meson, ninja etc) but I also have the environment of visual studio
+
+* Meson notes
+  - Should I use subdir or subproject?
+    The answer is almost always subdir
+  - https://mesonbuild.com/Users.html
+  - https://mesonbuild.com/Reference-manual.html#declare_dependency
+  - https://stackoverflow.com/questions/34602912/with-meson-build-can-i-define-intra-project-dependencies
+
+** depencdencies?
+   https://mesonbuild.com/Wrap-best-practices-and-tips.html#page-description
+   #+BEGIN_VERSE
+   myheader = custom_target(...)
+mylibrary = shared_library(...)
+mydep = declare_dependency(link_with : mylibrary,
+  include_directories : include_directories(...),
+  sources : myheader)
+
+And then you can use the dependency in the usual way:
+
+executable('dep_using_exe', 'main.c',
+  dependencies : mydep)
+
+   #+END_VERSE
+* Example APP for iplug
+** 
+** Command line
+   /JMC /MP /GS /W3 /wd"4996" /wd"4250" /wd"4018" /wd"4267" /wd"4068" /Zc:wchar_t
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IPlug\APP"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IPlug\RTAudio\include"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IPlug\RTAudio"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IPlug\RTMidi"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\WDL"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IPlug"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IPlug\Extras"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IPlug\Extras\Synth"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IPlug\Extras\Faust"
+   /I"W:\dev\_vst\AOD_IPlug01\\resources"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IGraphics"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IGraphics\Controls"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IGraphics\Drawing"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IGraphics\Platforms"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\IGraphics\Extras"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\WDL\lice"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\NanoSVG\src"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\NanoVG\src"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\AGG\agg-2.4\include"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\AGG\agg-2.4\font_freetype"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\AGG\agg-2.4\include\util"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\AGG\agg-2.4\include\platform\win32"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\AGG\agg-2.4\src"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\AGG\agg-2.4\src\platform\win32"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\Cairo"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\WDL\libpng"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\WDL\zlib"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\freetype\include"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\STB"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\imgui"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\imgui\examples"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia\include\core"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia\include\effects"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia\include\config"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia\include\utils"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia\include\gpu"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\src\skia\experimental\svg\model"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\yoga"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\yoga\yoga"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\glad_GL2\include"
+   /I"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IGraphics\glad_GL2\src"
+   /I"W:\dev\_vst\AOD_IPlug01\"
+
+   /ZI /Gm- /Od /Fd"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\vc142.pdb" /Zc:inline /fp:precise /D "APP_API" /D "__WINDOWS_DS__" /D "__WINDOWS_MM__" /D "__WINDOWS_ASIO__" /D "IPLUG_EDITOR=1" /D "IPLUG_DSP=1" /D "_DEBUG" /D "IGRAPHICS_NANOVG" /D "IGRAPHICS_GL2" /D "WIN32" /D "_CRT_SECURE_NO_DEPRECATE" /D "_CRT_NONSTDC_NO_DEPRECATE" /D "NOMINMAX" /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /MTd /std:c++14 /FC /Fa"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\" /EHsc /nologo /Fo"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\" /Fp"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.pch" /diagnostics:column 
+** Linking cmd
+   W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\win\x64\Debug
+
+
+   /OUT:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\AOD_IPlug01.exe" /MANIFEST /NXCOMPAT /PDB:"W:\dev\_vst\AOD_IPlug01\build-win\pdbs\AOD_IPlug01-app_x64.pdb"
+/DYNAMICBASE "dsound.lib" "winmm.lib" "wininet.lib" "comctl32.lib" "Shlwapi.lib" "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" "csv952.lib" 
+
+/IMPLIB:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.lib" /DEBUG:FASTLINK /MACHINE:X64 /PGD:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\AOD_IPlug01.pgd" /SUBSYSTEM:WINDOWS /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /ManifestFile:"W:\dev\_vst\AOD_IPlug01\build-win\app\x64\Debug\int\AOD_IPlug01.exe.intermediate.manifest" /ERRORREPORT:PROMPT /NOLOGO 
+
+/LIBPATH:"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\Build\win\x64\Debug" 
+
+/LIBPATH:"W:\dev\_vst\AOD_IPlug01\projects\..\..\iPlug2\Dependencies\IPlug\AAX_SDK\Libs\Debug" /LIBPATH:"C:\Program Files\Faust\lib"
+
+/TLBID:1 
+* projects
+  - https://github.com/linuxmint/cinnamon-desktop/blob/master/libcinnamon-desktop/meson.build#L62
+    install_headers ?
+  - https://code.videolan.org/videolan/dav1d/-/blob/master/src/meson.build#L253
+    libdav1d_entrypoints_objs = static_library(...).extract_all_objects()
+    - dependencies: [stdatomic_dependency],
+
+* emacs snippet
+#+BEGIN_SRC emacs-lisp :results silent
+(defun aod.meson/sources (dir regexp)
+  (interactive "DDirectory:\nsRegexp: ")
+  (message dir)
+  (let* ((filenames (directory-files dir
+				     t ; full path
+				     regexp ;match
+				     nil	;nosort
+				     ))
+	 (formatted (mapconcat (function (lambda (x)
+					   (let ((relative-path (file-relative-name x ".")))
+					     (format "'%s',\n" relative-path))))
+			       filenames
+			       " ")))
+    (insert formatted)))
+#+END_SRC
+
+  - dired-mark-files-containing-regexp 
+    cpp
+  - =w= dired-copy-filename-as-killd
+* TODO CI
+  - https://circleci.com/docs/2.0/hello-world-windows/
+* Troubleshooting
+** <2020-06-03 Wed> not launching??
+   on =IPlugAPP_main.cpp=
+   - not defined =APP_ALLOW_MULTIPLE_INSTANCES=
+   - =HANDLE hMutex = OpenMutex(MUTEX_ALL_ACCESS, 0, BUNDLE_NAME); // BUNDLE_NAME used because it won't have spaces in it= returns something..
+   - so it tries to bring it to front..
+
+
+   #+BEGIN_SRC sh
+ps -W | grep -i iplug
+   #+END_SRC
+
+   #+RESULTS:
+   : 74008       0       0       8472  ?              0 20:53:46 W:\dev\_tmp\mesonIPlug\examples\nogui01\buildvs\iplug_exe.exe
+
+
+   Note: these are the collumns
+   #+BEGIN_EXAMPLE
+         PID    PPID    PGID     WINPID   TTY         UID    STIME COMMAND
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+taskkill //f //pid 8472
+   #+END_SRC
+* <2020-09-04 Fri> reaper Extension
+  - [X] windows
+  - [X] linux
+    almost there.. the =extensions= menus appears in reaper, but no entry is there
+    ok fixed! was in =ReaperExt_include_in_plug_src.h= and see the =OS X has one extra menu=
+    in windows the =GetSubMenu= was passing =8= as 2nd argument, =else= 9.. linux also has to pass =8=
